@@ -52,6 +52,7 @@ jobs:
           REDIS_PORT: 6379
     - name: Run tests and flake8
       run: |
+        cd mysite
         python manage.py test --parallel
         export DIFF_FILES=$(git diff --name-only --diff-filter=ACM $(git merge-base HEAD origin/master) | grep "\.py" | grep -v "settings" | grep -v "migrations")
         if [[ ! -z $DIFF_FILES ]]
