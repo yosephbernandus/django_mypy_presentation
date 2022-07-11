@@ -54,11 +54,10 @@ jobs:
           REDIS_PORT: 6379
     - name: Run tests and flake8
       run: |
-        cd mysite
         python manage.py test --parallel
         export DIFF_FILES=$(git diff --name-only --diff-filter=ACM $(git merge-base HEAD origin/master) | grep "\.py" | grep -v "settings" | grep -v "migrations")
         if [[ ! -z $DIFF_FILES ]]
         then
           echo "Checking ..." $DIFF_FILES
-          flake8 --exclude migrations,libraries,.coveragerc,settings.py,*.yml,*.txt,*.html,*.js,*.css,*.ini,*.scss,*.md,mortgage.py,yarn.lock,package.json --ignore=E501,W503 $DIFF_FILES;
+          mysite/flake8 --exclude migrations,libraries,.coveragerc,settings.py,*.yml,*.txt,*.html,*.js,*.css,*.ini,*.scss,*.md,mortgage.py,yarn.lock,package.json --ignore=E501,W503 $DIFF_FILES;
         fi

@@ -10,6 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+from os.path import abspath, basename, dirname, join
+from os import path
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -37,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blog',
+    'mysite.apps.blogs',
 ]
 
 MIDDLEWARE = [
@@ -97,6 +100,43 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+]
+
+DJANGO_ROOT = dirname(abspath(__file__))
+
+# Fetch the project_root
+PROJECT_ROOT = dirname(DJANGO_ROOT)
+
+# The name of the whole site
+SITE_NAME = basename(DJANGO_ROOT)
+
+# Collect static files here
+STATIC_ROOT = join(DJANGO_ROOT, 'static')
+
+# Collect media files here
+MEDIA_ROOT = join(PROJECT_ROOT, 'media')
+
+PROJECT_TEMPLATES = [
+    join(PROJECT_ROOT, 'templates'),
+]
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            path.join(PROJECT_ROOT, "templates"),
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.media',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
     },
 ]
 
