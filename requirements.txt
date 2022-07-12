@@ -1,2 +1,4 @@
 Django==3.2.13
 psycopg2-binary==2.9.3
+mypy==0.761
+django-stubs==1.4.0
