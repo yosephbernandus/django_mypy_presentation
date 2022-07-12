@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'mysite.apps.blogs',
+    'mysite.apps.comments',
 ]
 
 MIDDLEWARE = [
@@ -171,3 +172,4 @@ try:
     from .local_settings import *  # type: ignore  # noqa
 except ImportError:
     pass
+
