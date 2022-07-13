@@ -24,7 +24,7 @@ class Post(models.Model):
     def get_first_comment(self) -> Comment:
         return Comment.objects.filter(post=self).first()
 
-    def get_union_data(self, is_valid: bool = True) -> Union[int, str]:
+    def get_union_data(self, is_valid: bool = True) -> Union[str, str]:
         if is_valid:
             return 1
         else:
